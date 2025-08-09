@@ -13,6 +13,9 @@ targets:
     baynext:
         target: python
         source: Baynext API
+        publish:
+            pypi:
+                token: $pypi_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/baynext/baynext-py/baynext-api-python-code-samples
