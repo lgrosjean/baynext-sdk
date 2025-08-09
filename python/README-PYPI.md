@@ -31,21 +31,21 @@ role-based access control to ensure secure and efficient project management.
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [baynext-py](#baynext-py)
-  * [SDK Installation](#sdk-installation)
-  * [IDE Support](#ide-support)
-  * [SDK Example Usage](#sdk-example-usage)
-  * [Authentication](#authentication)
-  * [Available Resources and Operations](#available-resources-and-operations)
-  * [Retries](#retries)
-  * [Error Handling](#error-handling)
-  * [Server Selection](#server-selection)
-  * [Custom HTTP Client](#custom-http-client)
-  * [Resource Management](#resource-management)
-  * [Debugging](#debugging)
-* [Development](#development)
-  * [Maturity](#maturity)
-  * [Contributions](#contributions)
+* [baynext-py](https://github.com/lgrosjean/baynext-sdk/blob/master/#baynext-py)
+  * [SDK Installation](https://github.com/lgrosjean/baynext-sdk/blob/master/#sdk-installation)
+  * [IDE Support](https://github.com/lgrosjean/baynext-sdk/blob/master/#ide-support)
+  * [SDK Example Usage](https://github.com/lgrosjean/baynext-sdk/blob/master/#sdk-example-usage)
+  * [Authentication](https://github.com/lgrosjean/baynext-sdk/blob/master/#authentication)
+  * [Available Resources and Operations](https://github.com/lgrosjean/baynext-sdk/blob/master/#available-resources-and-operations)
+  * [Retries](https://github.com/lgrosjean/baynext-sdk/blob/master/#retries)
+  * [Error Handling](https://github.com/lgrosjean/baynext-sdk/blob/master/#error-handling)
+  * [Server Selection](https://github.com/lgrosjean/baynext-sdk/blob/master/#server-selection)
+  * [Custom HTTP Client](https://github.com/lgrosjean/baynext-sdk/blob/master/#custom-http-client)
+  * [Resource Management](https://github.com/lgrosjean/baynext-sdk/blob/master/#resource-management)
+  * [Debugging](https://github.com/lgrosjean/baynext-sdk/blob/master/#debugging)
+* [Development](https://github.com/lgrosjean/baynext-sdk/blob/master/#development)
+  * [Maturity](https://github.com/lgrosjean/baynext-sdk/blob/master/#maturity)
+  * [Contributions](https://github.com/lgrosjean/baynext-sdk/blob/master/#contributions)
 
 <!-- End Table of Contents [toc] -->
 
@@ -198,14 +198,14 @@ with Baynext(
 <summary>Available methods</summary>
 
 
-### [projects](docs/sdks/projects/README.md)
+### [projects](https://github.com/lgrosjean/baynext-sdk/blob/master/docs/sdks/projects/README.md)
 
-* [list](docs/sdks/projects/README.md#list) - List all projects a user is a member of
-* [create](docs/sdks/projects/README.md#create) - Create a new project
+* [list](https://github.com/lgrosjean/baynext-sdk/blob/master/docs/sdks/projects/README.md#list) - List all projects a user is a member of
+* [create](https://github.com/lgrosjean/baynext-sdk/blob/master/docs/sdks/projects/README.md#create) - Create a new project
 
-### [user](docs/sdks/usersdk/README.md)
+### [user](https://github.com/lgrosjean/baynext-sdk/blob/master/docs/sdks/usersdk/README.md)
 
-* [get](docs/sdks/usersdk/README.md#get) - Get Current User Details
+* [get](https://github.com/lgrosjean/baynext-sdk/blob/master/docs/sdks/usersdk/README.md#get) - Get Current User Details
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -257,7 +257,7 @@ with Baynext(
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-[`BaynextError`](./src/baynext_py/errors/baynexterror.py) is the base class for all HTTP error responses. It has the following properties:
+[`BaynextError`](https://github.com/lgrosjean/baynext-sdk/blob/master/./src/baynext_py/errors/baynexterror.py) is the base class for all HTTP error responses. It has the following properties:
 
 | Property           | Type             | Description                                                                             |
 | ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
@@ -266,7 +266,7 @@ with Baynext(
 | `err.headers`      | `httpx.Headers`  | HTTP response headers                                                                   |
 | `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned.                                  |
 | `err.raw_response` | `httpx.Response` | Raw HTTP response                                                                       |
-| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
+| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](https://github.com/lgrosjean/baynext-sdk/blob/master/#error-classes). |
 
 ### Example
 ```python
@@ -301,7 +301,7 @@ with Baynext(
 
 ### Error Classes
 **Primary error:**
-* [`BaynextError`](./src/baynext_py/errors/baynexterror.py): The base class for HTTP error responses.
+* [`BaynextError`](https://github.com/lgrosjean/baynext-sdk/blob/master/./src/baynext_py/errors/baynexterror.py): The base class for HTTP error responses.
 
 <details><summary>Less common errors (6)</summary>
 
@@ -313,13 +313,13 @@ with Baynext(
     * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
 
 
-**Inherit from [`BaynextError`](./src/baynext_py/errors/baynexterror.py)**:
-* [`HTTPValidationError`](./src/baynext_py/errors/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 2 of 3 methods.*
-* [`ResponseValidationError`](./src/baynext_py/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
+**Inherit from [`BaynextError`](https://github.com/lgrosjean/baynext-sdk/blob/master/./src/baynext_py/errors/baynexterror.py)**:
+* [`HTTPValidationError`](https://github.com/lgrosjean/baynext-sdk/blob/master/./src/baynext_py/errors/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 2 of 3 methods.*
+* [`ResponseValidationError`](https://github.com/lgrosjean/baynext-sdk/blob/master/./src/baynext_py/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
 
-\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
+\* Check [the method documentation](https://github.com/lgrosjean/baynext-sdk/blob/master/#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->

@@ -2,19 +2,20 @@ speakeasyVersion: 1.600.2
 sources:
     Baynext API:
         sourceNamespace: baynext-api
-        sourceRevisionDigest: sha256:f548355ca5aa7dc716cd534ec7419edcd759e9107174907d6407875a003cd309
-        sourceBlobDigest: sha256:47979bcf6138e40f6af66bb06f3e93d9438f4cf2cae99d2936443fe5206d395d
+        sourceRevisionDigest: sha256:1162b1e235ebae2616a7ceb73f5cd65f0cc5b4f7d58a3f5eca9837c1a40278c8
+        sourceBlobDigest: sha256:f95bf86156f9f7381c00393be343b4792243ff662d1b72517b176cb94fa5e454
         tags:
             - latest
+            - speakeasy-sdk-regen-1754741280
             - 0.1.0
 targets:
     baynext:
         source: Baynext API
         sourceNamespace: baynext-api
-        sourceRevisionDigest: sha256:f548355ca5aa7dc716cd534ec7419edcd759e9107174907d6407875a003cd309
-        sourceBlobDigest: sha256:47979bcf6138e40f6af66bb06f3e93d9438f4cf2cae99d2936443fe5206d395d
+        sourceRevisionDigest: sha256:1162b1e235ebae2616a7ceb73f5cd65f0cc5b4f7d58a3f5eca9837c1a40278c8
+        sourceBlobDigest: sha256:f95bf86156f9f7381c00393be343b4792243ff662d1b72517b176cb94fa5e454
         codeSamplesNamespace: baynext-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:867c1b0a30f0cb3ebfe7c18b435c448c164d7a0bd3987b08567c1df24b63633f
+        codeSamplesRevisionDigest: sha256:8d1303983b454ec594eaec49fa96b733afc52966123f9f88b4fd6f85e6f229b8
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -31,6 +32,9 @@ workflow:
         baynext:
             target: python
             source: Baynext API
+            publish:
+                pypi:
+                    token: $pypi_token
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/baynext/baynext-py/baynext-api-python-code-samples

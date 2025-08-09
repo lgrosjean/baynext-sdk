@@ -23,7 +23,6 @@ import os
 
 
 with Baynext(
-    server_url="https://api.example.com",
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
 ) as baynext:
 
