@@ -1,0 +1,223 @@
+openapi: "3.1.0"
+info:
+  title: "Baynext API"
+  summary: "The Baynext API allows you to manage Baynext programmatically\n.With the Baynext API, you manage all objects in your Baynext account."
+  description: "\nThis is the API documentation for the Baynext project management system.\nIt provides endpoints for managing projects, datasets, pipelines, and more.\n\nAuthentication is handled via JWT tokens, and the system supports\nrole-based access control to ensure secure and efficient project management.\n"
+  version: "0.1.0"
+paths:
+  "/v1/projects":
+    get:
+      tags:
+        - "Project"
+      summary: "List all projects a user is a member of"
+      description: "List projects for the current authenticated user."
+      operationId: "list_user_projects_v1_projects_get"
+      security:
+        - HTTPBearer: []
+      parameters:
+        - name: "limit"
+          in: "query"
+          required: false
+          schema:
+            anyOf:
+              - type: "integer"
+                exclusiveMaximum: 100
+                exclusiveMinimum: 0
+              - type: "null"
+            description: "Number of projects to return"
+            title: "Limit"
+          description: "Number of projects to return"
+          example: 10
+        - name: "offset"
+          in: "query"
+          required: false
+          schema:
+            anyOf:
+              - type: "integer"
+              - type: "null"
+            description: "Number of projects to skip"
+            title: "Offset"
+          description: "Number of projects to skip"
+          example: 0
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            "application/json":
+              schema:
+                type: "array"
+                items: {"$ref": "#/components/schemas/ProjectPublic"}
+                title: "Response List User Projects V1 Projects Get"
+        "422":
+          description: "Validation Error"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/HTTPValidationError"}
+      x-speakeasy-group: "projects"
+      x-speakeasy-name-override: "list"
+    post:
+      tags:
+        - "Project"
+      summary: "Create a new project"
+      description: "Create a new project for the current authenticated user."
+      operationId: "create_v1_projects_post"
+      security:
+        - HTTPBearer: []
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema: {"$ref": "#/components/schemas/ProjectCreate"}
+      responses:
+        "201":
+          description: "Successful Response"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/ProjectCreated"}
+        "422":
+          description: "Validation Error"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/HTTPValidationError"}
+      x-speakeasy-group: "projects"
+      x-speakeasy-name-override: "create"
+  "/v1/user/me":
+    get:
+      summary: "Get Current User Details"
+      description: "Get the current user.\n\nThis endpoint is used to retrieve the user information of the currently\nauthenticated user."
+      operationId: "get_current_user_details_v1_user_me_get"
+      responses:
+        "200":
+          description: "Successful Response"
+          content:
+            "application/json":
+              schema: {"$ref": "#/components/schemas/User"}
+      security:
+        - HTTPBearer: []
+      x-speakeasy-group: "user"
+      x-speakeasy-name-override: "get"
+components:
+  schemas:
+    "HTTPValidationError":
+      properties:
+        "detail":
+          items: {"$ref": "#/components/schemas/ValidationError"}
+          type: "array"
+          title: "Detail"
+      type: "object"
+      title: "HTTPValidationError"
+    "ProjectCreate":
+      properties:
+        "name":
+          type: "string"
+          maxLength: 200
+          minLength: 3
+          title: "Name"
+        "description":
+          anyOf:
+            - type: "string"
+              maxLength: 1000
+            - type: "null"
+          title: "Description"
+      type: "object"
+      required:
+        - "name"
+      title: "ProjectCreate"
+      description: "Project creation model for API requests."
+    "ProjectCreated":
+      properties:
+        "name":
+          type: "string"
+          maxLength: 200
+          minLength: 3
+          title: "Name"
+        "id":
+          type: "string"
+          title: "Id"
+      type: "object"
+      required:
+        - "name"
+        - "id"
+      title: "ProjectCreated"
+      description: "Project creation model with owner ID."
+    "ProjectPublic":
+      properties:
+        "name":
+          type: "string"
+          maxLength: 200
+          minLength: 3
+          title: "Name"
+        "id":
+          type: "string"
+          title: "Id"
+        "owner_id":
+          type: "string"
+          title: "Owner Id"
+        "created_at":
+          type: "string"
+          format: "date-time"
+          title: "Created At"
+        "updated_at":
+          anyOf:
+            - type: "string"
+              format: "date-time"
+            - type: "null"
+          title: "Updated At"
+      type: "object"
+      required:
+        - "name"
+        - "id"
+        - "owner_id"
+        - "created_at"
+        - "updated_at"
+      title: "ProjectPublic"
+      description: "Public project model for API responses."
+    "User":
+      properties:
+        "created_at":
+          type: "string"
+          format: "date-time"
+          title: "Created At"
+        "updated_at":
+          anyOf:
+            - type: "string"
+              format: "date-time"
+            - type: "null"
+          title: "Updated At"
+        "id":
+          type: "string"
+          title: "Id"
+        "email":
+          type: "string"
+          format: "email"
+          title: "Email"
+      type: "object"
+      required:
+        - "email"
+      title: "User"
+      description: "User model."
+    "ValidationError":
+      properties:
+        "loc":
+          items:
+            anyOf:
+              - type: "string"
+              - type: "integer"
+          type: "array"
+          title: "Location"
+        "msg":
+          type: "string"
+          title: "Message"
+        "type":
+          type: "string"
+          title: "Error Type"
+      type: "object"
+      required:
+        - "loc"
+        - "msg"
+        - "type"
+      title: "ValidationError"
+  securitySchemes:
+    "HTTPBearer":
+      type: "http"
+      scheme: "bearer"

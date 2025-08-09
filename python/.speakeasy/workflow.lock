@@ -1,0 +1,39 @@
+speakeasyVersion: 1.600.2
+sources:
+    Baynext API:
+        sourceNamespace: baynext-api
+        sourceRevisionDigest: sha256:f548355ca5aa7dc716cd534ec7419edcd759e9107174907d6407875a003cd309
+        sourceBlobDigest: sha256:47979bcf6138e40f6af66bb06f3e93d9438f4cf2cae99d2936443fe5206d395d
+        tags:
+            - latest
+            - 0.1.0
+targets:
+    baynext:
+        source: Baynext API
+        sourceNamespace: baynext-api
+        sourceRevisionDigest: sha256:f548355ca5aa7dc716cd534ec7419edcd759e9107174907d6407875a003cd309
+        sourceBlobDigest: sha256:47979bcf6138e40f6af66bb06f3e93d9438f4cf2cae99d2936443fe5206d395d
+        codeSamplesNamespace: baynext-api-python-code-samples
+        codeSamplesRevisionDigest: sha256:867c1b0a30f0cb3ebfe7c18b435c448c164d7a0bd3987b08567c1df24b63633f
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        Baynext API:
+            inputs:
+                - location: https://baynext-api.onrender.com/openapi.json
+            overlays:
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            output: .speakeasy/out.openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/baynext/baynext-py/baynext-api
+    targets:
+        baynext:
+            target: python
+            source: Baynext API
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/baynext/baynext-py/baynext-api-python-code-samples
+                labelOverride:
+                    fixedValue: Python (SDK)
+                blocking: false

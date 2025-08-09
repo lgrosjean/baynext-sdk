@@ -1,0 +1,21 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Baynext API:
+        inputs:
+            - location: https://baynext-api.onrender.com/openapi.json
+        overlays:
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+        output: .speakeasy/out.openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/baynext/baynext-py/baynext-api
+targets:
+    baynext:
+        target: python
+        source: Baynext API
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/baynext/baynext-py/baynext-api-python-code-samples
+            labelOverride:
+                fixedValue: Python (SDK)
+            blocking: false

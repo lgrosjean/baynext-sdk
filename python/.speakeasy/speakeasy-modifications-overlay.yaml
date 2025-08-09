@@ -1,0 +1,40 @@
+overlay: 1.0.0
+x-speakeasy-jsonpath: rfc9535
+info:
+  title: Speakeasy Modifications
+  version: 0.0.2
+  x-speakeasy-metadata:
+    after: ""
+    before: ""
+    type: speakeasy-modifications
+actions:
+  - target: $["paths"]["/v1/user/me"]["get"]
+    update:
+      x-speakeasy-group: user
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.user.get()
+      before: sdk.<no_group>.get_current_user_details_v1_user_me_get()
+      created_at: 1754739243090
+      reviewed_at: 1754739258283
+      type: method-name
+  - target: $["paths"]["/v1/projects"]["get"]
+    update:
+      x-speakeasy-group: projects
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.projects.list()
+      before: sdk.Project.list_user_projects_v1_projects_get()
+      created_at: 1754739243090
+      reviewed_at: 1754739258283
+      type: method-name
+  - target: $["paths"]["/v1/projects"]["post"]
+    update:
+      x-speakeasy-group: projects
+      x-speakeasy-name-override: create
+    x-speakeasy-metadata:
+      after: sdk.projects.create()
+      before: sdk.Project.create_v1_projects_post()
+      created_at: 1754739243090
+      reviewed_at: 1754739258283
+      type: method-name

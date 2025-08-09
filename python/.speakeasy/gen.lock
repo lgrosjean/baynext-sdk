@@ -1,0 +1,127 @@
+lockVersion: 2.0.0
+id: 01ecd09e-f970-4091-bf97-cb3fd9892f2f
+management:
+  docChecksum: 9d78ca199253087d73fc003fa44f54fd
+  docVersion: 0.1.0
+  speakeasyVersion: 1.600.2
+  generationVersion: 2.677.3
+  releaseVersion: 0.1.1
+  configChecksum: 00a0c8b7e4498183a4c031361434e1ec
+features:
+  python:
+    additionalDependencies: 1.0.0
+    core: 5.19.7
+    defaultEnabledRetries: 0.2.0
+    devContainers: 3.0.0
+    envVarSecurityUsage: 0.3.2
+    flatRequests: 1.0.1
+    flattening: 3.1.1
+    globalSecurity: 3.0.3
+    globalSecurityCallbacks: 1.0.0
+    globalSecurityFlattening: 1.0.0
+    globalServerURLs: 3.1.1
+    groups: 3.0.0
+    methodArguments: 1.0.2
+    nameOverrides: 3.0.1
+    nullables: 1.0.1
+    responseFormat: 1.0.1
+    retries: 3.0.2
+    sdkHooks: 1.1.0
+    unions: 3.0.4
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - .vscode/settings.json
+  - USAGE.md
+  - docs/errors/httpvalidationerror.md
+  - docs/models/listuserprojectsv1projectsgetrequest.md
+  - docs/models/loc.md
+  - docs/models/projectcreate.md
+  - docs/models/projectcreated.md
+  - docs/models/projectpublic.md
+  - docs/models/security.md
+  - docs/models/user.md
+  - docs/models/utils/retryconfig.md
+  - docs/models/validationerror.md
+  - docs/sdks/baynext/README.md
+  - docs/sdks/projects/README.md
+  - docs/sdks/usersdk/README.md
+  - poetry.toml
+  - py.typed
+  - pylintrc
+  - pyproject.toml
+  - scripts/publish.sh
+  - src/baynext_py/__init__.py
+  - src/baynext_py/_hooks/__init__.py
+  - src/baynext_py/_hooks/sdkhooks.py
+  - src/baynext_py/_hooks/types.py
+  - src/baynext_py/_version.py
+  - src/baynext_py/basesdk.py
+  - src/baynext_py/errors/__init__.py
+  - src/baynext_py/errors/baynextdefaulterror.py
+  - src/baynext_py/errors/baynexterror.py
+  - src/baynext_py/errors/httpvalidationerror.py
+  - src/baynext_py/errors/no_response_error.py
+  - src/baynext_py/errors/responsevalidationerror.py
+  - src/baynext_py/httpclient.py
+  - src/baynext_py/models/__init__.py
+  - src/baynext_py/models/list_user_projects_v1_projects_getop.py
+  - src/baynext_py/models/projectcreate.py
+  - src/baynext_py/models/projectcreated.py
+  - src/baynext_py/models/projectpublic.py
+  - src/baynext_py/models/security.py
+  - src/baynext_py/models/user.py
+  - src/baynext_py/models/validationerror.py
+  - src/baynext_py/projects.py
+  - src/baynext_py/py.typed
+  - src/baynext_py/sdk.py
+  - src/baynext_py/sdkconfiguration.py
+  - src/baynext_py/types/__init__.py
+  - src/baynext_py/types/basemodel.py
+  - src/baynext_py/user_sdk.py
+  - src/baynext_py/utils/__init__.py
+  - src/baynext_py/utils/annotations.py
+  - src/baynext_py/utils/datetimes.py
+  - src/baynext_py/utils/enums.py
+  - src/baynext_py/utils/eventstreaming.py
+  - src/baynext_py/utils/forms.py
+  - src/baynext_py/utils/headers.py
+  - src/baynext_py/utils/logger.py
+  - src/baynext_py/utils/metadata.py
+  - src/baynext_py/utils/queryparams.py
+  - src/baynext_py/utils/requestbodies.py
+  - src/baynext_py/utils/retries.py
+  - src/baynext_py/utils/security.py
+  - src/baynext_py/utils/serializers.py
+  - src/baynext_py/utils/unmarshal_json_response.py
+  - src/baynext_py/utils/url.py
+  - src/baynext_py/utils/values.py
+examples:
+  get_current_user_details_v1_user_me_get:
+    speakeasy-default-get-current-user-details-v1-user-me-get:
+      responses:
+        "200":
+          application/json: {"email": "Murphy_Farrell62@hotmail.com"}
+  list_user_projects_v1_projects_get:
+    speakeasy-default-list-user-projects-v1-projects-get:
+      parameters:
+        query:
+          limit: 10
+          offset: 0
+      responses:
+        "200":
+          application/json: [{"name": "<value>", "id": "<id>", "owner_id": "<id>", "created_at": "2024-12-26T13:33:03.933Z", "updated_at": null}]
+        "422":
+          application/json: {}
+  create_v1_projects_post:
+    speakeasy-default-create-v1-projects-post:
+      requestBody:
+        application/json: {"name": "<value>"}
+      responses:
+        "201":
+          application/json: {"name": "<value>", "id": "<id>"}
+        "422":
+          application/json: {}
+examplesVersion: 1.0.2
