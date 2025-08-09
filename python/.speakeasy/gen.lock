@@ -1,12 +1,16 @@
 lockVersion: 2.0.0
 id: 01ecd09e-f970-4091-bf97-cb3fd9892f2f
 management:
-  docChecksum: 9d78ca199253087d73fc003fa44f54fd
+  docChecksum: 67217d88d9c65b25102fbbf141c4adba
   docVersion: 0.1.0
   speakeasyVersion: 1.600.2
   generationVersion: 2.677.3
-  releaseVersion: 0.1.1
-  configChecksum: 00a0c8b7e4498183a4c031361434e1ec
+  releaseVersion: 0.1.2
+  configChecksum: df900da2fde778c84468d6c707d1e51e
+  repoURL: https://github.com/lgrosjean/baynext-sdk.git
+  repoSubDirectory: python
+  installationURL: https://github.com/lgrosjean/baynext-sdk.git#subdirectory=python
+  published: true
 features:
   python:
     additionalDependencies: 1.0.0
@@ -52,6 +56,7 @@ generatedFiles:
   - py.typed
   - pylintrc
   - pyproject.toml
+  - scripts/prepare_readme.py
   - scripts/publish.sh
   - src/baynext_py/__init__.py
   - src/baynext_py/_hooks/__init__.py

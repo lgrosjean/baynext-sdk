@@ -5,12 +5,12 @@ from .httpclient import AsyncHttpClient, ClientOwner, HttpClient, close_clients
 from .sdkconfiguration import SDKConfiguration
 from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
-from baynext_py import models
+from baynext_py import models, utils
 from baynext_py._hooks import SDKHooks
 from baynext_py.types import OptionalNullable, UNSET
 import httpx
 import importlib
-from typing import Any, Callable, Optional, TYPE_CHECKING, Union, cast
+from typing import Any, Callable, Dict, Optional, TYPE_CHECKING, Union, cast
 import weakref
 
 if TYPE_CHECKING:
@@ -40,8 +40,10 @@ class Baynext(BaseSDK):
 
     def __init__(
         self,
-        server_url: str,
         http_bearer: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
+        server_idx: Optional[int] = None,
+        server_url: Optional[str] = None,
+        url_params: Optional[Dict[str, str]] = None,
         client: Optional[HttpClient] = None,
         async_client: Optional[AsyncHttpClient] = None,
         retry_config: OptionalNullable[RetryConfig] = UNSET,
@@ -87,6 +89,10 @@ class Baynext(BaseSDK):
         else:
             security = models.Security(http_bearer=http_bearer)
 
+        if server_url is not None:
+            if url_params is not None:
+                server_url = utils.template_url(server_url, url_params)
+
         BaseSDK.__init__(
             self,
             SDKConfiguration(
@@ -96,6 +102,7 @@ class Baynext(BaseSDK):
                 async_client_supplied=async_client_supplied,
                 security=security,
                 server_url=server_url,
+                server_idx=server_idx,
                 retry_config=retry_config,
                 timeout_ms=timeout_ms,
                 debug_logger=debug_logger,
