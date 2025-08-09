@@ -5,17 +5,17 @@ from .httpclient import AsyncHttpClient, ClientOwner, HttpClient, close_clients
 from .sdkconfiguration import SDKConfiguration
 from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
-from baynext_py import models, utils
-from baynext_py._hooks import SDKHooks
-from baynext_py.types import OptionalNullable, UNSET
+from baynext import models, utils
+from baynext._hooks import SDKHooks
+from baynext.types import OptionalNullable, UNSET
 import httpx
 import importlib
 from typing import Any, Callable, Dict, Optional, TYPE_CHECKING, Union, cast
 import weakref
 
 if TYPE_CHECKING:
-    from baynext_py.projects import Projects
-    from baynext_py.user_sdk import UserSDK
+    from baynext.projects import Projects
+    from baynext.user_sdk import UserSDK
 
 
 class Baynext(BaseSDK):
@@ -34,8 +34,8 @@ class Baynext(BaseSDK):
     projects: "Projects"
     user: "UserSDK"
     _sub_sdk_map = {
-        "projects": ("baynext_py.projects", "Projects"),
-        "user": ("baynext_py.user_sdk", "UserSDK"),
+        "projects": ("baynext.projects", "Projects"),
+        "user": ("baynext.user_sdk", "UserSDK"),
     }
 
     def __init__(

@@ -5,8 +5,8 @@ management:
   docVersion: 0.1.0
   speakeasyVersion: 1.600.2
   generationVersion: 2.677.3
-  releaseVersion: 0.1.2
-  configChecksum: df900da2fde778c84468d6c707d1e51e
+  releaseVersion: 0.1.0
+  configChecksum: 4107e9ff6c57b0ff1fa7209818f611df
   repoURL: https://github.com/lgrosjean/baynext-sdk.git
   repoSubDirectory: python
   installationURL: https://github.com/lgrosjean/baynext-sdk.git#subdirectory=python
@@ -14,6 +14,7 @@ management:
 features:
   python:
     additionalDependencies: 1.0.0
+    configurableModuleName: 0.2.0
     core: 5.19.7
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
@@ -58,51 +59,51 @@ generatedFiles:
   - pyproject.toml
   - scripts/prepare_readme.py
   - scripts/publish.sh
-  - src/baynext_py/__init__.py
-  - src/baynext_py/_hooks/__init__.py
-  - src/baynext_py/_hooks/sdkhooks.py
-  - src/baynext_py/_hooks/types.py
-  - src/baynext_py/_version.py
-  - src/baynext_py/basesdk.py
-  - src/baynext_py/errors/__init__.py
-  - src/baynext_py/errors/baynextdefaulterror.py
-  - src/baynext_py/errors/baynexterror.py
-  - src/baynext_py/errors/httpvalidationerror.py
-  - src/baynext_py/errors/no_response_error.py
-  - src/baynext_py/errors/responsevalidationerror.py
-  - src/baynext_py/httpclient.py
-  - src/baynext_py/models/__init__.py
-  - src/baynext_py/models/list_user_projects_v1_projects_getop.py
-  - src/baynext_py/models/projectcreate.py
-  - src/baynext_py/models/projectcreated.py
-  - src/baynext_py/models/projectpublic.py
-  - src/baynext_py/models/security.py
-  - src/baynext_py/models/user.py
-  - src/baynext_py/models/validationerror.py
-  - src/baynext_py/projects.py
-  - src/baynext_py/py.typed
-  - src/baynext_py/sdk.py
-  - src/baynext_py/sdkconfiguration.py
-  - src/baynext_py/types/__init__.py
-  - src/baynext_py/types/basemodel.py
-  - src/baynext_py/user_sdk.py
-  - src/baynext_py/utils/__init__.py
-  - src/baynext_py/utils/annotations.py
-  - src/baynext_py/utils/datetimes.py
-  - src/baynext_py/utils/enums.py
-  - src/baynext_py/utils/eventstreaming.py
-  - src/baynext_py/utils/forms.py
-  - src/baynext_py/utils/headers.py
-  - src/baynext_py/utils/logger.py
-  - src/baynext_py/utils/metadata.py
-  - src/baynext_py/utils/queryparams.py
-  - src/baynext_py/utils/requestbodies.py
-  - src/baynext_py/utils/retries.py
-  - src/baynext_py/utils/security.py
-  - src/baynext_py/utils/serializers.py
-  - src/baynext_py/utils/unmarshal_json_response.py
-  - src/baynext_py/utils/url.py
-  - src/baynext_py/utils/values.py
+  - src/baynext/__init__.py
+  - src/baynext/_hooks/__init__.py
+  - src/baynext/_hooks/sdkhooks.py
+  - src/baynext/_hooks/types.py
+  - src/baynext/_version.py
+  - src/baynext/basesdk.py
+  - src/baynext/errors/__init__.py
+  - src/baynext/errors/baynextdefaulterror.py
+  - src/baynext/errors/baynexterror.py
+  - src/baynext/errors/httpvalidationerror.py
+  - src/baynext/errors/no_response_error.py
+  - src/baynext/errors/responsevalidationerror.py
+  - src/baynext/httpclient.py
+  - src/baynext/models/__init__.py
+  - src/baynext/models/list_user_projects_v1_projects_getop.py
+  - src/baynext/models/projectcreate.py
+  - src/baynext/models/projectcreated.py
+  - src/baynext/models/projectpublic.py
+  - src/baynext/models/security.py
+  - src/baynext/models/user.py
+  - src/baynext/models/validationerror.py
+  - src/baynext/projects.py
+  - src/baynext/py.typed
+  - src/baynext/sdk.py
+  - src/baynext/sdkconfiguration.py
+  - src/baynext/types/__init__.py
+  - src/baynext/types/basemodel.py
+  - src/baynext/user_sdk.py
+  - src/baynext/utils/__init__.py
+  - src/baynext/utils/annotations.py
+  - src/baynext/utils/datetimes.py
+  - src/baynext/utils/enums.py
+  - src/baynext/utils/eventstreaming.py
+  - src/baynext/utils/forms.py
+  - src/baynext/utils/headers.py
+  - src/baynext/utils/logger.py
+  - src/baynext/utils/metadata.py
+  - src/baynext/utils/queryparams.py
+  - src/baynext/utils/requestbodies.py
+  - src/baynext/utils/retries.py
+  - src/baynext/utils/security.py
+  - src/baynext/utils/serializers.py
+  - src/baynext/utils/unmarshal_json_response.py
+  - src/baynext/utils/url.py
+  - src/baynext/utils/values.py
 examples:
   get_current_user_details_v1_user_me_get:
     speakeasy-default-get-current-user-details-v1-user-me-get:

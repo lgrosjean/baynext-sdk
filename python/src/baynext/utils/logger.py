@@ -23,5 +23,5 @@ def get_body_content(req: httpx.Request) -> str:
 def get_default_logger() -> Logger:
     if os.getenv("BAYNEXT_DEBUG"):
         logging.basicConfig(level=logging.DEBUG)
-        return logging.getLogger("baynext_py")
+        return logging.getLogger("baynext")
     return NoOpLogger()

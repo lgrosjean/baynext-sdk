@@ -8,8 +8,8 @@ from ._version import (
 )
 from .httpclient import AsyncHttpClient, HttpClient
 from .utils import Logger, RetryConfig, remove_suffix
-from baynext_py import models
-from baynext_py.types import OptionalNullable, UNSET
+from baynext import models
+from baynext.types import OptionalNullable, UNSET
 from dataclasses import dataclass
 from pydantic import Field
 from typing import Callable, Dict, Optional, Tuple, Union
