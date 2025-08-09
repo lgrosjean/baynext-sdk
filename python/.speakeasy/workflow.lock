@@ -6,7 +6,6 @@ sources:
         sourceBlobDigest: sha256:f95bf86156f9f7381c00393be343b4792243ff662d1b72517b176cb94fa5e454
         tags:
             - latest
-            - speakeasy-sdk-regen-1754741280
             - 0.1.0
 targets:
     baynext:
@@ -15,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:1162b1e235ebae2616a7ceb73f5cd65f0cc5b4f7d58a3f5eca9837c1a40278c8
         sourceBlobDigest: sha256:f95bf86156f9f7381c00393be343b4792243ff662d1b72517b176cb94fa5e454
         codeSamplesNamespace: baynext-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:8d1303983b454ec594eaec49fa96b733afc52966123f9f88b4fd6f85e6f229b8
+        codeSamplesRevisionDigest: sha256:fde03e938b08f2b3593041d1c180c2e95eec0426fd7662a2c8e780c848f7e3b9
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

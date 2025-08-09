@@ -94,7 +94,7 @@ It's also possible to write a standalone Python script without needing to set up
 # ]
 # ///
 
-from baynext_py import Baynext
+from baynext import Baynext
 
 sdk = Baynext(
   # SDK arguments
@@ -124,15 +124,15 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 
 ```python
 # Synchronous Example
-from baynext_py import Baynext
+from baynext import Baynext
 import os
 
 
 with Baynext(
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as baynext:
+) as b_client:
 
-    res = baynext.projects.list(limit=10, offset=0)
+    res = b_client.projects.list(limit=10, offset=0)
 
     # Handle response
     print(res)
@@ -144,16 +144,16 @@ The same SDK client can also be used to make asynchronous requests by importing 
 ```python
 # Asynchronous Example
 import asyncio
-from baynext_py import Baynext
+from baynext import Baynext
 import os
 
 async def main():
 
     async with Baynext(
         http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-    ) as baynext:
+    ) as b_client:
 
-        res = await baynext.projects.list_async(limit=10, offset=0)
+        res = await b_client.projects.list_async(limit=10, offset=0)
 
         # Handle response
         print(res)
@@ -175,15 +175,15 @@ This SDK supports the following security scheme globally:
 
 To authenticate with the API the `http_bearer` parameter must be set when initializing the SDK client instance. For example:
 ```python
-from baynext_py import Baynext
+from baynext import Baynext
 import os
 
 
 with Baynext(
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as baynext:
+) as b_client:
 
-    res = baynext.projects.list(limit=10, offset=0)
+    res = b_client.projects.list(limit=10, offset=0)
 
     # Handle response
     print(res)
@@ -217,16 +217,16 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
 ```python
-from baynext_py import Baynext
-from baynext_py.utils import BackoffStrategy, RetryConfig
+from baynext import Baynext
+from baynext.utils import BackoffStrategy, RetryConfig
 import os
 
 
 with Baynext(
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as baynext:
+) as b_client:
 
-    res = baynext.projects.list(limit=10, offset=0,
+    res = b_client.projects.list(limit=10, offset=0,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -236,17 +236,17 @@ with Baynext(
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
 ```python
-from baynext_py import Baynext
-from baynext_py.utils import BackoffStrategy, RetryConfig
+from baynext import Baynext
+from baynext.utils import BackoffStrategy, RetryConfig
 import os
 
 
 with Baynext(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as baynext:
+) as b_client:
 
-    res = baynext.projects.list(limit=10, offset=0)
+    res = b_client.projects.list(limit=10, offset=0)
 
     # Handle response
     print(res)
@@ -257,7 +257,7 @@ with Baynext(
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-[`BaynextError`](./src/baynext_py/errors/baynexterror.py) is the base class for all HTTP error responses. It has the following properties:
+[`BaynextError`](./src/baynext/errors/baynexterror.py) is the base class for all HTTP error responses. It has the following properties:
 
 | Property           | Type             | Description                                                                             |
 | ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
@@ -270,17 +270,17 @@ with Baynext(
 
 ### Example
 ```python
-from baynext_py import Baynext, errors
+from baynext import Baynext, errors
 import os
 
 
 with Baynext(
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as baynext:
+) as b_client:
     res = None
     try:
 
-        res = baynext.projects.list(limit=10, offset=0)
+        res = b_client.projects.list(limit=10, offset=0)
 
         # Handle response
         print(res)
@@ -301,7 +301,7 @@ with Baynext(
 
 ### Error Classes
 **Primary error:**
-* [`BaynextError`](./src/baynext_py/errors/baynexterror.py): The base class for HTTP error responses.
+* [`BaynextError`](./src/baynext/errors/baynexterror.py): The base class for HTTP error responses.
 
 <details><summary>Less common errors (6)</summary>
 
@@ -313,9 +313,9 @@ with Baynext(
     * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
 
 
-**Inherit from [`BaynextError`](./src/baynext_py/errors/baynexterror.py)**:
-* [`HTTPValidationError`](./src/baynext_py/errors/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 2 of 3 methods.*
-* [`ResponseValidationError`](./src/baynext_py/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
+**Inherit from [`BaynextError`](./src/baynext/errors/baynexterror.py)**:
+* [`HTTPValidationError`](./src/baynext/errors/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 2 of 3 methods.*
+* [`ResponseValidationError`](./src/baynext/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
 
@@ -329,16 +329,16 @@ with Baynext(
 
 The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
-from baynext_py import Baynext
+from baynext import Baynext
 import os
 
 
 with Baynext(
     server_url="https://baynext-api.onrender.com",
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as baynext:
+) as b_client:
 
-    res = baynext.projects.list(limit=10, offset=0)
+    res = b_client.projects.list(limit=10, offset=0)
 
     # Handle response
     print(res)
@@ -355,7 +355,7 @@ This allows you to wrap the client with your own custom logic, such as adding cu
 
 For example, you could specify a header for every request that this sdk makes as follows:
 ```python
-from baynext_py import Baynext
+from baynext import Baynext
 import httpx
 
 http_client = httpx.Client(headers={"x-custom-header": "someValue"})
@@ -364,8 +364,8 @@ s = Baynext(client=http_client)
 
 or you could wrap the client with your own custom logic:
 ```python
-from baynext_py import Baynext
-from baynext_py.httpclient import AsyncHttpClient
+from baynext import Baynext
+from baynext.httpclient import AsyncHttpClient
 import httpx
 
 class CustomClient(AsyncHttpClient):
@@ -435,13 +435,13 @@ The `Baynext` class implements the context manager protocol and registers a fina
 [context-manager]: https://docs.python.org/3/reference/datamodel.html#context-managers
 
 ```python
-from baynext_py import Baynext
+from baynext import Baynext
 import os
 def main():
 
     with Baynext(
         http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-    ) as baynext:
+    ) as b_client:
         # Rest of application here...
 
 
@@ -450,7 +450,7 @@ async def amain():
 
     async with Baynext(
         http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-    ) as baynext:
+    ) as b_client:
         # Rest of application here...
 ```
 <!-- End Resource Management [resource-management] -->
@@ -462,11 +462,11 @@ You can setup your SDK to emit debug logs for SDK requests and responses.
 
 You can pass your own logger class directly into your SDK.
 ```python
-from baynext_py import Baynext
+from baynext import Baynext
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
-s = Baynext(debug_logger=logging.getLogger("baynext_py"))
+s = Baynext(debug_logger=logging.getLogger("baynext"))
 ```
 
 You can also enable a default debug logger by setting an environment variable `BAYNEXT_DEBUG` to true.

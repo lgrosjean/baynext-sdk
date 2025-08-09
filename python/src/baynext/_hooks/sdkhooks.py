@@ -13,7 +13,7 @@ from .types import (
 )
 from .registration import init_hooks
 from typing import List, Optional, Tuple
-from baynext_py.sdkconfiguration import SDKConfiguration
+from baynext.sdkconfiguration import SDKConfiguration
 
 
 class SDKHooks(Hooks):

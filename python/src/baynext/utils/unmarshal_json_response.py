@@ -5,7 +5,7 @@ from typing import Any, Optional
 import httpx
 
 from .serializers import unmarshal_json
-from baynext_py import errors
+from baynext import errors
 
 
 def unmarshal_json_response(

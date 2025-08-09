@@ -18,15 +18,15 @@ authenticated user.
 
 <!-- UsageSnippet language="python" operationID="get_current_user_details_v1_user_me_get" method="get" path="/v1/user/me" -->
 ```python
-from baynext_py import Baynext
+from baynext import Baynext
 import os
 
 
 with Baynext(
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as baynext:
+) as b_client:
 
-    res = baynext.user.get()
+    res = b_client.user.get()
 
     # Handle response
     print(res)

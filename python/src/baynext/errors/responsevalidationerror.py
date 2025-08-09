@@ -3,7 +3,7 @@
 import httpx
 from typing import Optional
 
-from baynext_py.errors import BaynextError
+from baynext.errors import BaynextError
 
 
 class ResponseValidationError(BaynextError):

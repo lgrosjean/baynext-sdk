@@ -16,15 +16,15 @@ List projects for the current authenticated user.
 
 <!-- UsageSnippet language="python" operationID="list_user_projects_v1_projects_get" method="get" path="/v1/projects" -->
 ```python
-from baynext_py import Baynext
+from baynext import Baynext
 import os
 
 
 with Baynext(
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as baynext:
+) as b_client:
 
-    res = baynext.projects.list(limit=10, offset=0)
+    res = b_client.projects.list(limit=10, offset=0)
 
     # Handle response
     print(res)
@@ -58,15 +58,15 @@ Create a new project for the current authenticated user.
 
 <!-- UsageSnippet language="python" operationID="create_v1_projects_post" method="post" path="/v1/projects" -->
 ```python
-from baynext_py import Baynext
+from baynext import Baynext
 import os
 
 
 with Baynext(
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as baynext:
+) as b_client:
 
-    res = baynext.projects.create(name="<value>")
+    res = b_client.projects.create(name="<value>")
 
     # Handle response
     print(res)
