@@ -1,4 +1,4 @@
-name: Generate
+name: Generate Python SDK
 permissions:
   checks: write
   contents: write
@@ -21,6 +21,12 @@ permissions:
     types:
       - labeled
       - unlabeled
+
+defaults:
+  run:
+    shell: bash
+    working-directory: ./python
+
 jobs:
   generate:
     uses: speakeasy-api/sdk-generation-action/.github/workflows/workflow-executor.yaml@v15
