@@ -41,7 +41,7 @@ class Projects(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListUserProjectsV1ProjectsGetRequest(
+        request = models.ListRequest(
             limit=limit,
             offset=offset,
         )
@@ -74,7 +74,7 @@ class Projects(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="list_user_projects_v1_projects_get",
+                operation_id="list",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -137,7 +137,7 @@ class Projects(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.ListUserProjectsV1ProjectsGetRequest(
+        request = models.ListRequest(
             limit=limit,
             offset=offset,
         )
@@ -170,7 +170,7 @@ class Projects(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="list_user_projects_v1_projects_get",
+                operation_id="list",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security

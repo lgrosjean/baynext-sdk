@@ -4,17 +4,14 @@ info:
   summary: "The Baynext API allows you to manage Baynext programmatically\n.With the Baynext API, you manage all objects in your Baynext account."
   description: "\nThis is the API documentation for the Baynext project management system.\nIt provides endpoints for managing projects, datasets, pipelines, and more.\n\nAuthentication is handled via JWT tokens, and the system supports\nrole-based access control to ensure secure and efficient project management.\n"
   version: "0.1.0"
-servers:
-  - url: "https://baynext-api.onrender.com"
-    description: "Production environment"
 paths:
   "/v1/projects":
     get:
       tags:
-        - "Project"
+        - "Projects"
       summary: "List all projects a user is a member of"
       description: "List projects for the current authenticated user."
-      operationId: "list_user_projects_v1_projects_get"
+      operationId: "list"
       security:
         - HTTPBearer: []
       parameters:
@@ -50,7 +47,7 @@ paths:
               schema:
                 type: "array"
                 items: {"$ref": "#/components/schemas/ProjectPublic"}
-                title: "Response List User Projects V1 Projects Get"
+                title: "Response List"
         "422":
           description: "Validation Error"
           content:
@@ -60,7 +57,7 @@ paths:
       x-speakeasy-name-override: "list"
     post:
       tags:
-        - "Project"
+        - "Projects"
       summary: "Create a new project"
       description: "Create a new project for the current authenticated user."
       operationId: "create_v1_projects_post"
@@ -153,26 +150,30 @@ components:
         "id":
           type: "string"
           title: "Id"
-        "owner_id":
+        "user_id":
           type: "string"
-          title: "Owner Id"
-        "created_at":
+          title: "User Id"
+        "slug":
+          type: "string"
+          title: "Slug"
+        "createdAt":
           type: "string"
           format: "date-time"
-          title: "Created At"
-        "updated_at":
+          title: "Createdat"
+        "updatedAt":
           anyOf:
             - type: "string"
               format: "date-time"
             - type: "null"
-          title: "Updated At"
+          title: "Updatedat"
       type: "object"
       required:
         - "name"
         - "id"
-        - "owner_id"
-        - "created_at"
-        - "updated_at"
+        - "user_id"
+        - "slug"
+        - "createdAt"
+        - "updatedAt"
       title: "ProjectPublic"
       description: "Public project model for API responses."
     "User":
@@ -194,11 +195,25 @@ components:
           type: "string"
           format: "email"
           title: "Email"
+        "user_metadata":
+          anyOf:
+            - {"$ref": "#/components/schemas/UserMetadata"}
+            - type: "null"
       type: "object"
       required:
         - "email"
       title: "User"
       description: "User model."
+    "UserMetadata":
+      properties:
+        "full_name":
+          anyOf:
+            - type: "string"
+            - type: "null"
+          title: "Full Name"
+      type: "object"
+      title: "UserMetadata"
+      description: "Metadata for a user."
     "ValidationError":
       properties:
         "loc":
