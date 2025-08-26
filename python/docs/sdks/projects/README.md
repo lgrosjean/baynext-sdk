@@ -14,13 +14,14 @@ List projects for the current authenticated user.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="list_user_projects_v1_projects_get" method="get" path="/v1/projects" -->
+<!-- UsageSnippet language="python" operationID="list" method="get" path="/v1/projects" -->
 ```python
 from baynext import Baynext
 import os
 
 
 with Baynext(
+    server_url="https://api.example.com",
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
 ) as b_client:
 
@@ -63,6 +64,7 @@ import os
 
 
 with Baynext(
+    server_url="https://api.example.com",
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
 ) as b_client:
 

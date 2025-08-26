@@ -17,15 +17,15 @@ generation:
     securityFeb2025: true
     sharedErrorComponentsApr2025: true
   auth:
-    oAuth2ClientCredentialsEnabled: true
-    oAuth2PasswordEnabled: true
+    oAuth2ClientCredentialsEnabled: false
+    oAuth2PasswordEnabled: false
   sdkHooksConfigAccess: true
   tests:
     generateTests: false
     generateNewTests: true
     skipResponseBodyAssertions: false
 python:
-  version: 0.1.0
+  version: 0.1.1
   additionalDependencies:
     dev: {}
     main: {}
@@ -56,6 +56,7 @@ python:
   methodArguments: infer-optional-args
   moduleName: baynext
   outputModelSuffix: output
+  packageManager: poetry
   packageName: baynext-py
   pytestFilterWarnings: []
   pytestTimeout: 0

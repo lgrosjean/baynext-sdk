@@ -5,15 +5,13 @@ from importlib import import_module
 import builtins
 
 if TYPE_CHECKING:
-    from .list_user_projects_v1_projects_getop import (
-        ListUserProjectsV1ProjectsGetRequest,
-        ListUserProjectsV1ProjectsGetRequestTypedDict,
-    )
+    from .listop import ListRequest, ListRequestTypedDict
     from .projectcreate import ProjectCreate, ProjectCreateTypedDict
     from .projectcreated import ProjectCreated, ProjectCreatedTypedDict
     from .projectpublic import ProjectPublic, ProjectPublicTypedDict
     from .security import Security, SecurityTypedDict
     from .user import User, UserTypedDict
+    from .usermetadata import UserMetadata, UserMetadataTypedDict
     from .validationerror import (
         Loc,
         LocTypedDict,
@@ -22,8 +20,8 @@ if TYPE_CHECKING:
     )
 
 __all__ = [
-    "ListUserProjectsV1ProjectsGetRequest",
-    "ListUserProjectsV1ProjectsGetRequestTypedDict",
+    "ListRequest",
+    "ListRequestTypedDict",
     "Loc",
     "LocTypedDict",
     "ProjectCreate",
@@ -35,14 +33,16 @@ __all__ = [
     "Security",
     "SecurityTypedDict",
     "User",
+    "UserMetadata",
+    "UserMetadataTypedDict",
     "UserTypedDict",
     "ValidationError",
     "ValidationErrorTypedDict",
 ]
 
 _dynamic_imports: dict[str, str] = {
-    "ListUserProjectsV1ProjectsGetRequest": ".list_user_projects_v1_projects_getop",
-    "ListUserProjectsV1ProjectsGetRequestTypedDict": ".list_user_projects_v1_projects_getop",
+    "ListRequest": ".listop",
+    "ListRequestTypedDict": ".listop",
     "ProjectCreate": ".projectcreate",
     "ProjectCreateTypedDict": ".projectcreate",
     "ProjectCreated": ".projectcreated",
@@ -53,6 +53,8 @@ _dynamic_imports: dict[str, str] = {
     "SecurityTypedDict": ".security",
     "User": ".user",
     "UserTypedDict": ".user",
+    "UserMetadata": ".usermetadata",
+    "UserMetadataTypedDict": ".usermetadata",
     "Loc": ".validationerror",
     "LocTypedDict": ".validationerror",
     "ValidationError": ".validationerror",

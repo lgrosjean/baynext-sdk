@@ -2,35 +2,25 @@
 
 from __future__ import annotations
 from baynext.types import BaseModel, Nullable, OptionalNullable, UNSET, UNSET_SENTINEL
-from baynext.utils import FieldMetadata, QueryParamMetadata
 from pydantic import model_serializer
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing_extensions import NotRequired, TypedDict
 
 
-class ListUserProjectsV1ProjectsGetRequestTypedDict(TypedDict):
-    limit: NotRequired[Nullable[int]]
-    r"""Number of projects to return"""
-    offset: NotRequired[Nullable[int]]
-    r"""Number of projects to skip"""
+class UserMetadataTypedDict(TypedDict):
+    r"""Metadata for a user."""
+
+    full_name: NotRequired[Nullable[str]]
 
 
-class ListUserProjectsV1ProjectsGetRequest(BaseModel):
-    limit: Annotated[
-        OptionalNullable[int],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
-    r"""Number of projects to return"""
+class UserMetadata(BaseModel):
+    r"""Metadata for a user."""
 
-    offset: Annotated[
-        OptionalNullable[int],
-        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
-    ] = UNSET
-    r"""Number of projects to skip"""
+    full_name: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["limit", "offset"]
-        nullable_fields = ["limit", "offset"]
+        optional_fields = ["full_name"]
+        nullable_fields = ["full_name"]
         null_default_fields = []
 
         serialized = handler(self)

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 01ecd09e-f970-4091-bf97-cb3fd9892f2f
 management:
-  docChecksum: 67217d88d9c65b25102fbbf141c4adba
+  docChecksum: 26a22f1eef76a3f301573d8bfc1ebec5
   docVersion: 0.1.0
-  speakeasyVersion: 1.600.2
-  generationVersion: 2.677.3
-  releaseVersion: 0.1.0
-  configChecksum: 4107e9ff6c57b0ff1fa7209818f611df
+  speakeasyVersion: 1.606.5
+  generationVersion: 2.687.1
+  releaseVersion: 0.1.1
+  configChecksum: 0b6ad21a62f2d5e3a8c9e1fc1ec101e8
   repoURL: https://github.com/lgrosjean/baynext-sdk.git
   repoSubDirectory: python
   installationURL: https://github.com/lgrosjean/baynext-sdk.git#subdirectory=python
@@ -15,7 +15,7 @@ features:
   python:
     additionalDependencies: 1.0.0
     configurableModuleName: 0.2.0
-    core: 5.19.7
+    core: 5.19.9
     defaultEnabledRetries: 0.2.0
     devContainers: 3.0.0
     envVarSecurityUsage: 0.3.2
@@ -41,13 +41,14 @@ generatedFiles:
   - .vscode/settings.json
   - USAGE.md
   - docs/errors/httpvalidationerror.md
-  - docs/models/listuserprojectsv1projectsgetrequest.md
+  - docs/models/listrequest.md
   - docs/models/loc.md
   - docs/models/projectcreate.md
   - docs/models/projectcreated.md
   - docs/models/projectpublic.md
   - docs/models/security.md
   - docs/models/user.md
+  - docs/models/usermetadata.md
   - docs/models/utils/retryconfig.md
   - docs/models/validationerror.md
   - docs/sdks/baynext/README.md
@@ -73,12 +74,13 @@ generatedFiles:
   - src/baynext/errors/responsevalidationerror.py
   - src/baynext/httpclient.py
   - src/baynext/models/__init__.py
-  - src/baynext/models/list_user_projects_v1_projects_getop.py
+  - src/baynext/models/listop.py
   - src/baynext/models/projectcreate.py
   - src/baynext/models/projectcreated.py
   - src/baynext/models/projectpublic.py
   - src/baynext/models/security.py
   - src/baynext/models/user.py
+  - src/baynext/models/usermetadata.py
   - src/baynext/models/validationerror.py
   - src/baynext/projects.py
   - src/baynext/py.typed
@@ -130,4 +132,19 @@ examples:
           application/json: {"name": "<value>", "id": "<id>"}
         "422":
           application/json: {}
+  list:
+    speakeasy-default-list:
+      parameters:
+        query:
+          limit: 10
+          offset: 0
+      responses:
+        "200":
+          application/json: [{"name": "<value>", "id": "<id>", "user_id": "<id>", "slug": "<value>", "createdAt": "2025-12-12T06:38:51.693Z", "updatedAt": "2023-04-06T00:09:27.240Z"}]
+        "422":
+          application/json: {}
 examplesVersion: 1.0.2
+releaseNotes: |
+  ## SDK Changes Detected:
+  * `baynext.projects.list()`:  `response.[]` **Changed** **Breaking** :warning:
+  * `baynext.user.get()`:  `response.user_metadata` **Added**

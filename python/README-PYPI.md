@@ -31,21 +31,20 @@ role-based access control to ensure secure and efficient project management.
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [baynext-py](https://github.com/lgrosjean/baynext-sdk/blob/master/#baynext-py)
-  * [SDK Installation](https://github.com/lgrosjean/baynext-sdk/blob/master/#sdk-installation)
-  * [IDE Support](https://github.com/lgrosjean/baynext-sdk/blob/master/#ide-support)
-  * [SDK Example Usage](https://github.com/lgrosjean/baynext-sdk/blob/master/#sdk-example-usage)
-  * [Authentication](https://github.com/lgrosjean/baynext-sdk/blob/master/#authentication)
-  * [Available Resources and Operations](https://github.com/lgrosjean/baynext-sdk/blob/master/#available-resources-and-operations)
-  * [Retries](https://github.com/lgrosjean/baynext-sdk/blob/master/#retries)
-  * [Error Handling](https://github.com/lgrosjean/baynext-sdk/blob/master/#error-handling)
-  * [Server Selection](https://github.com/lgrosjean/baynext-sdk/blob/master/#server-selection)
-  * [Custom HTTP Client](https://github.com/lgrosjean/baynext-sdk/blob/master/#custom-http-client)
-  * [Resource Management](https://github.com/lgrosjean/baynext-sdk/blob/master/#resource-management)
-  * [Debugging](https://github.com/lgrosjean/baynext-sdk/blob/master/#debugging)
-* [Development](https://github.com/lgrosjean/baynext-sdk/blob/master/#development)
-  * [Maturity](https://github.com/lgrosjean/baynext-sdk/blob/master/#maturity)
-  * [Contributions](https://github.com/lgrosjean/baynext-sdk/blob/master/#contributions)
+* [baynext-py](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#baynext-py)
+  * [SDK Installation](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#sdk-installation)
+  * [IDE Support](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#ide-support)
+  * [SDK Example Usage](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#sdk-example-usage)
+  * [Authentication](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#authentication)
+  * [Available Resources and Operations](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#available-resources-and-operations)
+  * [Retries](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#retries)
+  * [Error Handling](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#error-handling)
+  * [Custom HTTP Client](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#custom-http-client)
+  * [Resource Management](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#resource-management)
+  * [Debugging](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#debugging)
+* [Development](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#development)
+  * [Maturity](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#maturity)
+  * [Contributions](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#contributions)
 
 <!-- End Table of Contents [toc] -->
 
@@ -57,7 +56,15 @@ role-based access control to ensure secure and efficient project management.
 >
 > Once a Python version reaches its [official end of life date](https://devguide.python.org/versions/), a 3-month grace period is provided for users to upgrade. Following this grace period, the minimum python version supported in the SDK will be updated.
 
-The SDK can be installed with either *pip* or *poetry* package managers.
+The SDK can be installed with *uv*, *pip*, or *poetry* package managers.
+
+### uv
+
+*uv* is a fast Python package installer and resolver, designed as a drop-in replacement for pip and pip-tools. It's recommended for its speed and modern Python tooling capabilities.
+
+```bash
+uv add baynext-py
+```
 
 ### PIP
 
@@ -94,7 +101,7 @@ It's also possible to write a standalone Python script without needing to set up
 # ]
 # ///
 
-from baynext_py import Baynext
+from baynext import Baynext
 
 sdk = Baynext(
   # SDK arguments
@@ -124,15 +131,16 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 
 ```python
 # Synchronous Example
-from baynext_py import Baynext
+from baynext import Baynext
 import os
 
 
 with Baynext(
+    server_url="https://api.example.com",
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as baynext:
+) as b_client:
 
-    res = baynext.projects.list(limit=10, offset=0)
+    res = b_client.projects.list(limit=10, offset=0)
 
     # Handle response
     print(res)
@@ -144,16 +152,17 @@ The same SDK client can also be used to make asynchronous requests by importing 
 ```python
 # Asynchronous Example
 import asyncio
-from baynext_py import Baynext
+from baynext import Baynext
 import os
 
 async def main():
 
     async with Baynext(
+        server_url="https://api.example.com",
         http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-    ) as baynext:
+    ) as b_client:
 
-        res = await baynext.projects.list_async(limit=10, offset=0)
+        res = await b_client.projects.list_async(limit=10, offset=0)
 
         # Handle response
         print(res)
@@ -175,15 +184,16 @@ This SDK supports the following security scheme globally:
 
 To authenticate with the API the `http_bearer` parameter must be set when initializing the SDK client instance. For example:
 ```python
-from baynext_py import Baynext
+from baynext import Baynext
 import os
 
 
 with Baynext(
+    server_url="https://api.example.com",
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as baynext:
+) as b_client:
 
-    res = baynext.projects.list(limit=10, offset=0)
+    res = b_client.projects.list(limit=10, offset=0)
 
     # Handle response
     print(res)
@@ -198,14 +208,14 @@ with Baynext(
 <summary>Available methods</summary>
 
 
-### [projects](https://github.com/lgrosjean/baynext-sdk/blob/master/docs/sdks/projects/README.md)
+### [projects](https://github.com/lgrosjean/baynext-sdk/blob/master/python/docs/sdks/projects/README.md)
 
-* [list](https://github.com/lgrosjean/baynext-sdk/blob/master/docs/sdks/projects/README.md#list) - List all projects a user is a member of
-* [create](https://github.com/lgrosjean/baynext-sdk/blob/master/docs/sdks/projects/README.md#create) - Create a new project
+* [list](https://github.com/lgrosjean/baynext-sdk/blob/master/python/docs/sdks/projects/README.md#list) - List all projects a user is a member of
+* [create](https://github.com/lgrosjean/baynext-sdk/blob/master/python/docs/sdks/projects/README.md#create) - Create a new project
 
-### [user](https://github.com/lgrosjean/baynext-sdk/blob/master/docs/sdks/usersdk/README.md)
+### [user](https://github.com/lgrosjean/baynext-sdk/blob/master/python/docs/sdks/usersdk/README.md)
 
-* [get](https://github.com/lgrosjean/baynext-sdk/blob/master/docs/sdks/usersdk/README.md#get) - Get Current User Details
+* [get](https://github.com/lgrosjean/baynext-sdk/blob/master/python/docs/sdks/usersdk/README.md#get) - Get Current User Details
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -217,16 +227,17 @@ Some of the endpoints in this SDK support retries. If you use the SDK without an
 
 To change the default retry strategy for a single API call, simply provide a `RetryConfig` object to the call:
 ```python
-from baynext_py import Baynext
-from baynext_py.utils import BackoffStrategy, RetryConfig
+from baynext import Baynext
+from baynext.utils import BackoffStrategy, RetryConfig
 import os
 
 
 with Baynext(
+    server_url="https://api.example.com",
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as baynext:
+) as b_client:
 
-    res = baynext.projects.list(limit=10, offset=0,
+    res = b_client.projects.list(limit=10, offset=0,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -236,17 +247,18 @@ with Baynext(
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
 ```python
-from baynext_py import Baynext
-from baynext_py.utils import BackoffStrategy, RetryConfig
+from baynext import Baynext
+from baynext.utils import BackoffStrategy, RetryConfig
 import os
 
 
 with Baynext(
+    server_url="https://api.example.com",
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as baynext:
+) as b_client:
 
-    res = baynext.projects.list(limit=10, offset=0)
+    res = b_client.projects.list(limit=10, offset=0)
 
     # Handle response
     print(res)
@@ -257,7 +269,7 @@ with Baynext(
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-[`BaynextError`](https://github.com/lgrosjean/baynext-sdk/blob/master/./src/baynext_py/errors/baynexterror.py) is the base class for all HTTP error responses. It has the following properties:
+[`BaynextError`](https://github.com/lgrosjean/baynext-sdk/blob/master/python/./src/baynext/errors/baynexterror.py) is the base class for all HTTP error responses. It has the following properties:
 
 | Property           | Type             | Description                                                                             |
 | ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
@@ -266,21 +278,22 @@ with Baynext(
 | `err.headers`      | `httpx.Headers`  | HTTP response headers                                                                   |
 | `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned.                                  |
 | `err.raw_response` | `httpx.Response` | Raw HTTP response                                                                       |
-| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](https://github.com/lgrosjean/baynext-sdk/blob/master/#error-classes). |
+| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#error-classes). |
 
 ### Example
 ```python
-from baynext_py import Baynext, errors
+from baynext import Baynext, errors
 import os
 
 
 with Baynext(
+    server_url="https://api.example.com",
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as baynext:
+) as b_client:
     res = None
     try:
 
-        res = baynext.projects.list(limit=10, offset=0)
+        res = b_client.projects.list(limit=10, offset=0)
 
         # Handle response
         print(res)
@@ -301,7 +314,7 @@ with Baynext(
 
 ### Error Classes
 **Primary error:**
-* [`BaynextError`](https://github.com/lgrosjean/baynext-sdk/blob/master/./src/baynext_py/errors/baynexterror.py): The base class for HTTP error responses.
+* [`BaynextError`](https://github.com/lgrosjean/baynext-sdk/blob/master/python/./src/baynext/errors/baynexterror.py): The base class for HTTP error responses.
 
 <details><summary>Less common errors (6)</summary>
 
@@ -313,38 +326,14 @@ with Baynext(
     * [`httpx.TimeoutException`](https://www.python-httpx.org/exceptions/#httpx.TimeoutException): HTTP request timed out.
 
 
-**Inherit from [`BaynextError`](https://github.com/lgrosjean/baynext-sdk/blob/master/./src/baynext_py/errors/baynexterror.py)**:
-* [`HTTPValidationError`](https://github.com/lgrosjean/baynext-sdk/blob/master/./src/baynext_py/errors/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 2 of 3 methods.*
-* [`ResponseValidationError`](https://github.com/lgrosjean/baynext-sdk/blob/master/./src/baynext_py/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
+**Inherit from [`BaynextError`](https://github.com/lgrosjean/baynext-sdk/blob/master/python/./src/baynext/errors/baynexterror.py)**:
+* [`HTTPValidationError`](https://github.com/lgrosjean/baynext-sdk/blob/master/python/./src/baynext/errors/httpvalidationerror.py): Validation Error. Status code `422`. Applicable to 2 of 3 methods.*
+* [`ResponseValidationError`](https://github.com/lgrosjean/baynext-sdk/blob/master/python/./src/baynext/errors/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
 
-\* Check [the method documentation](https://github.com/lgrosjean/baynext-sdk/blob/master/#available-resources-and-operations) to see if the error is applicable.
+\* Check [the method documentation](https://github.com/lgrosjean/baynext-sdk/blob/master/python/#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
-
-<!-- Start Server Selection [server] -->
-## Server Selection
-
-### Override Server URL Per-Client
-
-The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
-```python
-from baynext_py import Baynext
-import os
-
-
-with Baynext(
-    server_url="https://baynext-api.onrender.com",
-    http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as baynext:
-
-    res = baynext.projects.list(limit=10, offset=0)
-
-    # Handle response
-    print(res)
-
-```
-<!-- End Server Selection [server] -->
 
 <!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client
@@ -355,7 +344,7 @@ This allows you to wrap the client with your own custom logic, such as adding cu
 
 For example, you could specify a header for every request that this sdk makes as follows:
 ```python
-from baynext_py import Baynext
+from baynext import Baynext
 import httpx
 
 http_client = httpx.Client(headers={"x-custom-header": "someValue"})
@@ -364,8 +353,8 @@ s = Baynext(client=http_client)
 
 or you could wrap the client with your own custom logic:
 ```python
-from baynext_py import Baynext
-from baynext_py.httpclient import AsyncHttpClient
+from baynext import Baynext
+from baynext.httpclient import AsyncHttpClient
 import httpx
 
 class CustomClient(AsyncHttpClient):
@@ -435,13 +424,14 @@ The `Baynext` class implements the context manager protocol and registers a fina
 [context-manager]: https://docs.python.org/3/reference/datamodel.html#context-managers
 
 ```python
-from baynext_py import Baynext
+from baynext import Baynext
 import os
 def main():
 
     with Baynext(
+        server_url="https://api.example.com",
         http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-    ) as baynext:
+    ) as b_client:
         # Rest of application here...
 
 
@@ -449,8 +439,9 @@ def main():
 async def amain():
 
     async with Baynext(
+        server_url="https://api.example.com",
         http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-    ) as baynext:
+    ) as b_client:
         # Rest of application here...
 ```
 <!-- End Resource Management [resource-management] -->
@@ -462,11 +453,11 @@ You can setup your SDK to emit debug logs for SDK requests and responses.
 
 You can pass your own logger class directly into your SDK.
 ```python
-from baynext_py import Baynext
+from baynext import Baynext
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
-s = Baynext(debug_logger=logging.getLogger("baynext_py"))
+s = Baynext(server_url="https://example.com", debug_logger=logging.getLogger("baynext"))
 ```
 
 You can also enable a default debug logger by setting an environment variable `BAYNEXT_DEBUG` to true.

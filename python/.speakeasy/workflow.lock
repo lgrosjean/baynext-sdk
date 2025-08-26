@@ -1,20 +1,21 @@
-speakeasyVersion: 1.600.2
+speakeasyVersion: 1.606.5
 sources:
     Baynext API:
         sourceNamespace: baynext-api
-        sourceRevisionDigest: sha256:1162b1e235ebae2616a7ceb73f5cd65f0cc5b4f7d58a3f5eca9837c1a40278c8
-        sourceBlobDigest: sha256:f95bf86156f9f7381c00393be343b4792243ff662d1b72517b176cb94fa5e454
+        sourceRevisionDigest: sha256:7ebe334d422a902b0112a85fb361ed0a178eb63af4baf85db74e477482504e63
+        sourceBlobDigest: sha256:2c832453eee4e7394142bef90802c6112bf2a7c1941761a64744becd5e23c53e
         tags:
             - latest
+            - speakeasy-sdk-regen-1755822018
             - 0.1.0
 targets:
     baynext:
         source: Baynext API
         sourceNamespace: baynext-api
-        sourceRevisionDigest: sha256:1162b1e235ebae2616a7ceb73f5cd65f0cc5b4f7d58a3f5eca9837c1a40278c8
-        sourceBlobDigest: sha256:f95bf86156f9f7381c00393be343b4792243ff662d1b72517b176cb94fa5e454
+        sourceRevisionDigest: sha256:7ebe334d422a902b0112a85fb361ed0a178eb63af4baf85db74e477482504e63
+        sourceBlobDigest: sha256:2c832453eee4e7394142bef90802c6112bf2a7c1941761a64744becd5e23c53e
         codeSamplesNamespace: baynext-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:fde03e938b08f2b3593041d1c180c2e95eec0426fd7662a2c8e780c848f7e3b9
+        codeSamplesRevisionDigest: sha256:1355d879b717e32034751ad4d5c2009df21f0cf1234f2c43331e4501efdf8e15
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

@@ -39,7 +39,6 @@ role-based access control to ensure secure and efficient project management.
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
-  * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
   * [Resource Management](#resource-management)
   * [Debugging](#debugging)
@@ -57,7 +56,15 @@ role-based access control to ensure secure and efficient project management.
 >
 > Once a Python version reaches its [official end of life date](https://devguide.python.org/versions/), a 3-month grace period is provided for users to upgrade. Following this grace period, the minimum python version supported in the SDK will be updated.
 
-The SDK can be installed with either *pip* or *poetry* package managers.
+The SDK can be installed with *uv*, *pip*, or *poetry* package managers.
+
+### uv
+
+*uv* is a fast Python package installer and resolver, designed as a drop-in replacement for pip and pip-tools. It's recommended for its speed and modern Python tooling capabilities.
+
+```bash
+uv add baynext-py
+```
 
 ### PIP
 
@@ -129,6 +136,7 @@ import os
 
 
 with Baynext(
+    server_url="https://api.example.com",
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
 ) as b_client:
 
@@ -150,6 +158,7 @@ import os
 async def main():
 
     async with Baynext(
+        server_url="https://api.example.com",
         http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
     ) as b_client:
 
@@ -180,6 +189,7 @@ import os
 
 
 with Baynext(
+    server_url="https://api.example.com",
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
 ) as b_client:
 
@@ -223,6 +233,7 @@ import os
 
 
 with Baynext(
+    server_url="https://api.example.com",
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
 ) as b_client:
 
@@ -242,6 +253,7 @@ import os
 
 
 with Baynext(
+    server_url="https://api.example.com",
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
 ) as b_client:
@@ -275,6 +287,7 @@ import os
 
 
 with Baynext(
+    server_url="https://api.example.com",
     http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
 ) as b_client:
     res = None
@@ -321,30 +334,6 @@ with Baynext(
 
 \* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
-
-<!-- Start Server Selection [server] -->
-## Server Selection
-
-### Override Server URL Per-Client
-
-The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
-```python
-from baynext import Baynext
-import os
-
-
-with Baynext(
-    server_url="https://baynext-api.onrender.com",
-    http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
-) as b_client:
-
-    res = b_client.projects.list(limit=10, offset=0)
-
-    # Handle response
-    print(res)
-
-```
-<!-- End Server Selection [server] -->
 
 <!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client
@@ -440,6 +429,7 @@ import os
 def main():
 
     with Baynext(
+        server_url="https://api.example.com",
         http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
     ) as b_client:
         # Rest of application here...
@@ -449,6 +439,7 @@ def main():
 async def amain():
 
     async with Baynext(
+        server_url="https://api.example.com",
         http_bearer=os.getenv("BAYNEXT_HTTP_BEARER", ""),
     ) as b_client:
         # Rest of application here...
@@ -466,7 +457,7 @@ from baynext import Baynext
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
-s = Baynext(debug_logger=logging.getLogger("baynext"))
+s = Baynext(server_url="https://example.com", debug_logger=logging.getLogger("baynext"))
 ```
 
 You can also enable a default debug logger by setting an environment variable `BAYNEXT_DEBUG` to true.
